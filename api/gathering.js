@@ -2,16 +2,10 @@ import request from '@/utils/request'
 const group_name = 'gathering'
 const api_name = 'gathering'
 export default {
-  getList() {
+  page(searchMap) {
     return request({
-      url: `/${group_name}/${api_name}`,
-      method: 'get'
-    })
-  },
-  search(page, size, searchMap) {
-    return request({
-      url: `/${group_name}/${api_name}/search/${page}/${size}`,
-      method: 'post',
+      url: `/${group_name}/${api_name}/page`,
+      method: 'get',
       data: searchMap
     })
   },
