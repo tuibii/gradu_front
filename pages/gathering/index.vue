@@ -1,23 +1,23 @@
 <template>
-  <div class="wrapper activities">
+  <div class="wrapper activities" style="margin-top: 110px;">
     <div class="activity-card-list">
       <div class="top-title">
         <h4 class="latest">最新活动</h4>
         <div class="clearfix"></div>
       </div>
-      <div class="activity-list" v-infinite-scroll="loadMore">
+      <div class="activity-list" >
         <ul class="activity">
-          <li class="activity-item" v-for="(item,index) in items" :key="index">
+          <li class="activity-item" v-for="(data,index) in dataList" :key="index">
             <div class="activity-inner">
               <a href="http://"></a>
               <div class="img">
-                <a :href="'/gathering/item/'+item.id" target="_blank"><img :src="item.image" alt="" /></a>
+                <a :href="'/gathering/item/'+data.id" target="_blank"><img src="~/assets/img/w3.jpg" alt="" /></a>
               </div>
               <div class="text">
-                <p class="title">{{item.name}}</p>
+                <p class="title">{{data.name}}</p>
                 <div class="fl goin">
-                  <p>时间：{{item.starttime}}</p>
-                  <p>城市：{{item.city}}</p>
+                  <p>时间：{{data.starttime}}</p>
+                  <p>地点：{{data.address}}</p>
                 </div>
                 <div class="fr btn">
                   <span class="sui-btn btn-bao">立即报名</span>
@@ -42,17 +42,12 @@
             }
         },
         asyncData(){
-            return  gatheringApi.page({state:'1',page:1,limit:12}).then( res => {
-                return {items: res.data.data.rows }
+            return  gatheringApi.page(1,8).then( res => {
+                return {dataList: res.data.data.rows }
             })
         },
         methods: {
-            loadMore(){
-                this.pageNo++
-                gatheringApi.page({state:'1',page:this.pageNo,limit:12}).then( res => {
-                    this.items = this.items.concat( res.data.data.rows )
-                })
-            }
+
         }
     }
 </script>

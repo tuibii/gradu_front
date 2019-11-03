@@ -2,11 +2,10 @@ import request from '@/utils/request'
 const group_name = 'gathering'
 const api_name = 'gathering'
 export default {
-  page(searchMap) {
+  page(page,limit) {
     return request({
-      url: `/${group_name}/${api_name}/page`,
-      method: 'get',
-      data: searchMap
+      url: `/${group_name}/${api_name}/page?page=`+page+'&limit='+limit+'&state=1',
+      method: 'get'
     })
   },
   save(pojo) {

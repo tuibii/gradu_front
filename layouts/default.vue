@@ -5,11 +5,11 @@
       <header class="trasparent_nav">
           <div class="wrapper">
             <div class="logo">
-              <a href="#"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
+              <a href="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
             </div>
             <nav>
               <ul>
-                <li><a href="#">首页</a></li>
+                <li><a href="/">首页</a></li>
                 <li><a href="/treehole">树洞广场</a></li>
                 <li><a href="#">文章</a></li>
                 <li><a href="#">问答</a></li>
@@ -22,11 +22,11 @@
       <header class="fixed_nav" v-if="!isTop">
         <div class="wrapper">
           <div class="logo">
-            <a href="#"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
+            <a href="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
           </div>
           <nav>
             <ul>
-              <li><a href="#">首页</a></li>
+              <li><a href="/">首页</a></li>
               <li><a href="/treehole">树洞广场</a></li>
               <li><a href="#">文章</a></li>
               <li><a href="#">问答</a></li>
@@ -36,7 +36,7 @@
           </nav>
         </div>
       </header>
-      <nuxt/>
+      <nuxt />
       <footer>
         <div class="wrapper">
           <section class="cta cta_footer" >
@@ -54,11 +54,16 @@
       </footer>
   </div>
 </template>
-<style>
-  @import '../assets/css/reset.css';
-  @import '../assets/css/main.css';
-</style>
 <script>
+    import '~/assets/plugins/normalize-css/normalize.css'
+    import '~/assets/plugins/yui/cssgrids-min.css'
+    import '~/assets/plugins/sui/sui.min.css'
+    import '~/assets/plugins/sui/sui-append.min.css'
+    import '~/assets/plugins/font-awesome/css/font-awesome.min.css'
+    import '~/assets/css/widget-base.css'
+    import '~/assets/css/widget-head-foot.css'
+    import '~/assets/css/reset.css';
+    import '~/assets/css/main.css';
 export default {
     data(){
       return{

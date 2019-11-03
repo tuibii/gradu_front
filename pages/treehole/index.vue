@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 110px;">
     <div class="wrapper tag-item">
       <div class="fl left-list">
         <div class="tc-data-list">
@@ -219,11 +219,9 @@
     </div>
   </div>
 </template>
-<style>
-  /*@import '../assets/css/reset.css';*/
-</style>
 <script>
-  export default {
+    import '~/assets/css/page-sj-spit-index.css'
+    export default {
 
   }
 </script>
