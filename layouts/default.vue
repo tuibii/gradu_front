@@ -1,5 +1,3 @@
-<srript src="../assets/js/jquery.js"></srript>
-<srript src="../assets/js/main.js"></srript>
 <template>
   <div>
       <header class="trasparent_nav">
@@ -8,13 +6,14 @@
               <a href="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
             </div>
             <nav>
-              <ul>
+              <ul >
                 <li><a href="/">首页</a></li>
                 <li><a href="/treehole">树洞广场</a></li>
                 <li><a href="#">文章</a></li>
                 <li><a href="#">问答</a></li>
                 <li><a href="#">社团</a></li>
                 <li><a href="/gathering">活动</a></li>
+                <li><a href="/"> <el-avatar>{{user.name}}</el-avatar></a></li>
               </ul>
             </nav>
           </div>
@@ -32,6 +31,7 @@
               <li><a href="#">问答</a></li>
               <li><a href="#">社团</a></li>
               <li><a href="/gathering">活动</a></li>
+              <li><a href="/"> <el-avatar >{{user.name}}</el-avatar></a></li>
             </ul>
           </nav>
         </div>
@@ -64,11 +64,17 @@
     import '~/assets/css/widget-head-foot.css'
     import '~/assets/css/reset.css';
     import '~/assets/css/main.css';
-export default {
+    import {getUser} from "../utils/auth";
+
+    export default {
     data(){
       return{
-          isTop:true
+          isTop: true,
+          user: {}
       }
+    },
+    created(){
+        this.user = getUser()
     },
     mounted () {
         window.addEventListener('scroll', this.handleScroll)

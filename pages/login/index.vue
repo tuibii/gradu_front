@@ -50,18 +50,18 @@
           <div class="control-group">
             <label for="inputname" class="control-label">手机号：</label>
             <div class="controls">
-              <input type="text" id="inputname" v-model="mobile" placeholder="11位手机号" class="input-xlarge" data-rules="required" />
+              <input type="text" id="inputname" v-model="mobile" placeholder="手机号" class="input-xlarge" data-rules="required" />
             </div>
           </div>
           <div class="control-group">
             <label for="inputpassword" class="control-label">密码：</label>
             <div class="controls">
-              <input type="text" id="inputpassword" v-model="password" placeholder="输入登录密码" class="input-xlarge" />
+              <input type="text" id="inputpassword" v-model="password" placeholder="登录密码" class="input-xlarge" />
             </div>
           </div>
           <div class="controls">
             <label> <input type="checkbox" name="remember-me" /><span class="type-text" style="font-size:12px;">记住登录状态</span> </label>
-            <button type="button" class="sui-btn btn-danger btn-yes"  >登 录</button>
+            <button type="button" class="sui-btn btn-danger btn-yes"  @click="login">登 录</button>
           </div>
           <div id="weixin"></div>
         </form>
@@ -72,6 +72,7 @@
 <script>
     import '~/assets/css/page-sj-person-loginsign.css'
     import userApi from '@/api/user'
+    import {setUser,getUser} from '@/utils/auth'
     export default {
         data(){
             return{
@@ -104,9 +105,8 @@
                 userApi.login(this.mobile,this.password ).then( res=> {
                     if(res.data.flag){
                         //保存用户信息
-                        setUser(res.data.data)
-
-                        location.href='/manager' //用户中心
+                        setUser(res.data.data.token, res.data.data.name, res.data.data.avatar)
+                        location.href='/' //用户中心
 
                     }else{
                         this.$message( {
