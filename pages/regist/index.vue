@@ -5,7 +5,7 @@
       <el-form-item prop="nickname" label="昵称">
         <el-input v-model="pojo.nickname" placeholder="昵称" maxlength="20" show-word-limit></el-input>
       </el-form-item>
-      <el-form-item prop="mobile" label="手机号">
+      <el-form-item prop="mobile" label="手机号" ref="pojo.mobile">
         <el-input v-model="pojo.mobile" placeholder="手机号"></el-input>
       </el-form-item>
       <el-form-item prop="code" label="验证码">
@@ -30,6 +30,20 @@
     import userApi from '@/api/user'
     export default {
         data(){
+            let telValidator = (rule,value,callback) => {
+                if(/^1[34578]\d{9}$/.test(value) === false){
+                    callback(new Error("请输入正确的手机号"));
+                }else{
+                    callback();
+                }
+            };
+            let checkedValidator = (rule,value,callback) => {
+                if(!value){
+                    callback(new Error("请勾选‘阅读并接受用户协议’"));
+                }else{
+                    callback();
+                }
+            };
             return{
                 pojo:{},
                 isDisabled: false,
@@ -48,51 +62,40 @@
                         { min: 8, max: 16, message: '长度在 8 到 16 个字符', trigger: 'blur' }
                     ],
                     checked: [
-                        {validator:function(rule,value,callback){
-                                if(!value){
-                                    callback(new Error("请勾选‘阅读并接受用户协议’"));
-                                }else{
-                                    callback();
-                                }
-                            }, trigger: 'blur'}
+                        {validator:checkedValidator, trigger: 'blur'}
                     ],
-                    mobile:[{
-                        required: true,
-                        message: '请输入手机号码',
-                        trigger: 'blur'
-                    },
-                        {validator:function(rule,value,callback){
-                                if(/^1[34578]\d{9}$/.test(value) == false){
-                                    callback(new Error("请输入正确的手机号"));
-                                }else{
-                                    callback();
-                                }
-                            }, trigger: 'blur'}
+                    mobile:[
+                        {required: true, message: '请输入手机号码', trigger: 'blur'},
+                        {validator:telValidator, trigger: 'blur'}
                     ],
                 }
-            }
+            };
         },
         methods:{
             sendSms(){
-                userApi.sendSms(this.pojo.mobile).then(res => {
-                    let me = this
-                    this.$message({
-                        message: res.data.message,
-                        type: (res.data.flag?'success':'error'),
-                        offset: 100
-                    })
-                    if (res.data.flag){
-                        me.isDisabled = true
-                        let interval = window.setInterval(function() {
-                            me.sendMsg = me.time + 's后重新发送'
-                            --me.time
-                            if(me.time < 0) {
-                                me.sendMsg = "重新发送"
-                                me.time = 120
-                                me.isDisabled = false
-                                window.clearInterval(interval)
+                this.$refs['pojo'].validateField('mobile',(callback) => {
+                    if (callback === ''){
+                        userApi.sendSms(this.pojo.mobile).then(res => {
+                            let me = this
+                            this.$message({
+                                message: res.data.message,
+                                type: (res.data.flag?'success':'error'),
+                                offset: 100
+                            })
+                            if (res.data.flag){
+                                me.isDisabled = true
+                                let interval = window.setInterval(function() {
+                                    me.sendMsg = me.time + 's后重新发送'
+                                    --me.time
+                                    if(me.time < 0) {
+                                        me.sendMsg = "重新发送"
+                                        me.time = 120
+                                        me.isDisabled = false
+                                        window.clearInterval(interval)
+                                    }
+                                }, 1000)
                             }
-                        }, 1000)
+                        })
                     }
                 })
             },

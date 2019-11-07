@@ -14,7 +14,7 @@
                 <li><a href="#">社团</a></li>
                 <li><a href="/gathering">活动</a></li>
                 <li v-if="user.name !== undefined"><a href="/"> <el-avatar >{{user.name}}</el-avatar></a></li>
-                <li v-else><a href="/login">登录/注册</a></li>
+                <li v-if="user.name===undefined"><a href="/login">登录</a>/<a href="/regist">注册</a></li>
               </ul>
             </nav>
           </div>
@@ -33,7 +33,7 @@
               <li><a href="#">社团</a></li>
               <li><a href="/gathering">活动</a></li>
               <li v-if="user.name !== undefined"><a href="/"> <el-avatar >{{user.name}}</el-avatar></a></li>
-              <li v-else><a href="/login">登录/注册</a></li>
+              <li v-if="user.name===undefined"><a href="/login">登录</a>/<a href="/regist">注册</a></li>
             </ul>
           </nav>
         </div>
