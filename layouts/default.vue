@@ -1,39 +1,39 @@
 <template>
   <div>
-      <header class="trasparent_nav">
+      <header class="trasparent_nav" style="margin: 0px;">
           <div class="wrapper">
             <div class="logo">
               <a href="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
             </div>
             <nav>
               <ul >
-                <li><a href="/">首页</a></li>
-                <li><a href="/treehole">树洞广场</a></li>
-                <li><a href="#">文章</a></li>
-                <li><a href="#">问答</a></li>
-                <li><a href="#">社团</a></li>
-                <li><a href="/gathering">活动</a></li>
-                <li v-if="user.name !== undefined"><a href="/"> <el-avatar >{{user.name}}</el-avatar></a></li>
-                <li v-if="user.name===undefined"><a href="/login">登录</a>/<a href="/regist">注册</a></li>
+                <li><nuxt-link to="/">首页</nuxt-link></li>
+                <li><nuxt-link to="/treehole">树洞广场</nuxt-link></li>
+                <li><nuxt-link to="#">文章</nuxt-link></li>
+                <li><nuxt-link to="#">问答</nuxt-link></li>
+                <li><nuxt-link to="#">社团</nuxt-link></li>
+                <li><nuxt-link to="/gathering">活动</nuxt-link></li>
+                <li v-if="user.name !== undefined"><nuxt-link to="/"> <el-avatar >{{user.name}}</el-avatar></nuxt-link></li>
+                <li v-if="user.name===undefined"><nuxt-link to="/login">登录</nuxt-link>/<nuxt-link to="/regist">注册</nuxt-link></li>
               </ul>
             </nav>
           </div>
       </header>
-      <header class="fixed_nav" v-if="!isTop">
+      <header class="fixed_nav" v-if="!isTop" style="margin: 0px">
         <div class="wrapper">
           <div class="logo">
             <a href="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
           </div>
           <nav>
             <ul>
-              <li><a href="/">首页</a></li>
-              <li><a href="/treehole">树洞广场</a></li>
-              <li><a href="#">文章</a></li>
-              <li><a href="#">问答</a></li>
-              <li><a href="#">社团</a></li>
-              <li><a href="/gathering">活动</a></li>
-              <li v-if="user.name !== undefined"><a href="/"> <el-avatar >{{user.name}}</el-avatar></a></li>
-              <li v-if="user.name===undefined"><a href="/login">登录</a>/<a href="/regist">注册</a></li>
+              <li><nuxt-link to="/">首页</nuxt-link></li>
+              <li><nuxt-link to="/treehole">树洞广场</nuxt-link></li>
+              <li><nuxt-link to="#">文章</nuxt-link></li>
+              <li><nuxt-link to="#">问答</nuxt-link></li>
+              <li><nuxt-link to="#">社团</nuxt-link></li>
+              <li><nuxt-link to="/gathering">活动</nuxt-link></li>
+              <li v-if="user.name !== undefined"><nuxt-link to="/"> <el-avatar >{{user.name}}</el-avatar></nuxt-link></li>
+              <li v-if="user.name===undefined"><nuxt-link to="/login">登录</nuxt-link>/<nuxt-link to="/regist">注册</nuxt-link></li>
             </ul>
           </nav>
         </div>
