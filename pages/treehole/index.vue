@@ -17,7 +17,7 @@
                 </div>
                 <div class="info">
                   <p class="text">
-                    <nuxt-link :to="'/treehole/'+item.id">{{item.content}}</nuxt-link>
+                    <nuxt-link :to="'/treehole/'+item._id">{{item.content}}</nuxt-link>
                   </p>
                   <div class="other">
                     <div class="fl date">
