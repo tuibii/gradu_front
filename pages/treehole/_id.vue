@@ -1,44 +1,41 @@
 <template>
-    <div class="wrapper tc-detail" style="margin-top: 110px;">
+    <div class="wrapper tc-detail" style="margin-top: 110px;min-height: 450px;">
     <div class="fl left-list">
+      <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom: 10px;">
+        <el-breadcrumb-item :to="{ path: '/treehole' }">返回广场</el-breadcrumb-item>
+        <el-breadcrumb-item>{{pojo.nickname}}的树洞</el-breadcrumb-item>
+      </el-breadcrumb>
      <div class="tc-detail">
       <!-- 标题区 -->
       <div class="detail-tit">
        <div class="detail-author">
-        <a href="javascript:;">{{pojo.nickname}}</a>
+         <el-avatar>{{pojo.nickname}}</el-avatar>
        </div>
-       <div class="detail-content">
+       <div class="detail-content" v-html="pojo.content">
         <p>{{pojo.content}}</p>
 
        </div>
        <div class="detail-tool">
         <ul>
-         <li><span class="star"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{pojo.thumbup}}</span></li>
-         <li><a href="#" ><i class="fa fa-share-alt" aria-hidden="true"></i> {{pojo.share}}</a></li>
-         <li><a @click="dialogVisible=true;content=''"><i  class="fa fa-commenting" aria-hidden="true"></i> {{pojo.comment}}</a></li>
+         <li><span @click="toComment"><i class="fa fa-commenting" aria-hidden="true"></i> {{pojo.comment}}</span></li>
         </ul>
        </div>
       </div>
 
       <!-- 评论区 -->
-      <div class="comment-area">
+      <div class="comment-area" v-if="commentlist.length > 0">
        <div class="comment-tit">
         <span>评论</span>
        </div>
        <ul class="comment-list">
         <li v-for="(item,index) in commentlist" :key="index">
          <div class="item-photo">
-           <el-avatar >test</el-avatar>
+           <el-avatar >{{item.nickname}}</el-avatar>
          </div>
-         <div class="item-content">
-          <p class="author"><a href="javascript:;">{{item.nickname}}</a> </p>
+         <div class="item-content" v-html="item.content">
           <p class="content">{{item.content}}</p>
          </div>
-         <div class="item-thumb">
-          <div>
-           <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{item.thumbup}}
-          </div>
-         </div> </li>
+        </li>
 
        </ul>
       </div>
@@ -53,8 +50,7 @@
     <div class="clearfix"></div>
 
     <el-dialog
-        title="评论" :visible.sync="dialogVisible"
-        width="40%">
+        title="评论" :visible.sync="dialogVisible">
         <div class="quill-editor"
             :content="content"
             @change="onEditorChange($event)"
@@ -72,9 +68,9 @@
 import '~/assets/css/page-sj-spit-detail.css'
 import treeholeApi from '@/api/treehole'
 import axios from 'axios'
+import {getUser} from'@/utils/auth'
 export default {
     asyncData({params}){
-
         return axios.all( [ treeholeApi.findById(params.id),treeholeApi.commentlist(params.id)  ] ).then(
             axios.spread( function( pojo,commentlist ){
                 return {
@@ -90,37 +86,61 @@ export default {
             content: '',
             editorOption: {
                 // some quill options
+                placeholder: ' ',
                 modules: {
                     toolbar: [
-                    [{ 'size': ['small', false, 'large'] }],
-                    ['bold', 'italic'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    ['link', 'image']
+                        [{ 'size': ['small', false, 'large'] }],
+                        ['bold', 'italic'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['link', 'image']
                     ]
                 }
             }
         }
     },
     methods:{
-       onEditorChange({ editor, html, text }) {
-        console.log('editor change!', editor, html, text)
-        this.content = html
-      },
-      save(){
-          treeholeApi.save({ content:this.content,parentid:this.pojo.id }  ).then(res=>{
+        onEditorChange({ editor, html, text }) {
+            this.content = html
+        },
+        save(){
+          treeholeApi.save({ content:this.content,parentid:this.pojo._id,nickname:getUser().name }).then(res=>{
+              let _this = this
               this.$message({
                   message: res.data.message,
-                  type: (res.data.flag?'success':'error')
+                  type: (res.data.flag?'success':'error'),
+                  offset: 100,
+                  duration: 500,
+                  onClose: function () {
+                      if (res.data.flag){
+                          _this.dialogVisible=false
+                      }
+                  }
               })
               if(res.data.flag){
-                  this.dialogVisible=false //关闭窗口
                   //刷新数据
-                  treeholeApi.commentlist(this.pojo.id ).then( res=>{
+                  treeholeApi.commentlist(this.pojo._id ).then( res=>{
                       this.commentlist=res.data.data
                   })
               }
           })
-      }
+        },
+        toComment(){
+            if (getUser().name === undefined){
+                this.$message({
+                    message: "请先登录",
+                    type: "error",
+                    offset: 100,
+                    duration: 2000,
+                    onClose: function () {
+                        location.href='/login'
+                    }
+                })
+
+            }else {
+                this.dialogVisible=true
+                this.content=''
+            }
+        }
     }
 
 }

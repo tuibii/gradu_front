@@ -20,12 +20,6 @@ export default {
           method: 'get'
         })
     },
-    thumbup(id){
-        return request({
-            url: `/${group_name}/${api_name}/thumbup/${id}`,
-            method: 'put'
-        })
-    },
     save(pojo) {
         return request({
           url: `/${group_name}/${api_name}`,

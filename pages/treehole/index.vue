@@ -10,15 +10,17 @@
                 <div class="fl record">
                   <div class="number">
                     <div class="border answer">
-                      <p class="usenum"><a href="#" class="zan"><i class="fa fa-thumbs-up " aria-hidden="true"></i></a></p>
+                      <p class="usenum"><i class="fa fa-thumbs-up " aria-hidden="true"></i></p>
                       <p class="zannum"> {{item.thumbup}} </p>
                     </div>
                   </div>
                 </div>
                 <div class="info">
-                  <p class="text">
-                    <nuxt-link :to="'/treehole/'+item._id">{{item.content}}</nuxt-link>
+                  <nuxt-link :to="'/treehole/'+item._id">
+                  <p class="text" v-html="item.content">
+                    {{item.content}}
                   </p>
+                  </nuxt-link>
                   <div class="other">
                     <div class="fl date">
                       <span>{{item.publishtime}}</span>

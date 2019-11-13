@@ -3,7 +3,7 @@
       <header class="trasparent_nav" style="margin: 0px;">
           <div class="wrapper">
             <div class="logo">
-              <a href="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></a>
+              <nuxt-link to="/"><img src="../assets/img/博砚.png" style="width: 180px;height: 68px;"/></nuxt-link>
             </div>
             <nav>
               <ul >
