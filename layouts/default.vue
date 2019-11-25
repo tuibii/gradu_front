@@ -10,10 +10,10 @@
                 <li><nuxt-link to="/">首页</nuxt-link></li>
                 <li><nuxt-link to="/treehole">树洞广场</nuxt-link></li>
                 <li><nuxt-link to="#">文章</nuxt-link></li>
-                <li><nuxt-link to="#">问答</nuxt-link></li>
-                <li><nuxt-link to="#">社团</nuxt-link></li>
+                <li><nuxt-link to="/qa">问答</nuxt-link></li>
+                <li><nuxt-link to="/club">社团</nuxt-link></li>
                 <li><nuxt-link to="/gathering">活动</nuxt-link></li>
-                <li v-if="user.name !== undefined"><nuxt-link to="/"> <el-avatar >{{user.name}}</el-avatar></nuxt-link></li>
+                <li v-if="user.name !== undefined"><nuxt-link to="/manager"> <el-avatar >{{user.name}}</el-avatar></nuxt-link></li>
                 <li v-if="user.name===undefined"><nuxt-link to="/login">登录</nuxt-link>/<nuxt-link to="/regist">注册</nuxt-link></li>
               </ul>
             </nav>
@@ -29,10 +29,10 @@
               <li><nuxt-link to="/">首页</nuxt-link></li>
               <li><nuxt-link to="/treehole">树洞广场</nuxt-link></li>
               <li><nuxt-link to="#">文章</nuxt-link></li>
-              <li><nuxt-link to="#">问答</nuxt-link></li>
-              <li><nuxt-link to="#">社团</nuxt-link></li>
+              <li><nuxt-link to="/qa">问答</nuxt-link></li>
+              <li><nuxt-link to="/club">社团</nuxt-link></li>
               <li><nuxt-link to="/gathering">活动</nuxt-link></li>
-              <li v-if="user.name !== undefined"><nuxt-link to="/"> <el-avatar >{{user.name}}</el-avatar></nuxt-link></li>
+              <li v-if="user.name !== undefined"><nuxt-link to="/manager"> <el-avatar >{{user.name}}</el-avatar></nuxt-link></li>
               <li v-if="user.name===undefined"><nuxt-link to="/login">登录</nuxt-link>/<nuxt-link to="/regist">注册</nuxt-link></li>
             </ul>
           </nav>

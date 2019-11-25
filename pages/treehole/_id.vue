@@ -121,6 +121,7 @@ export default {
                   treeholeApi.commentlist(this.pojo._id ).then( res=>{
                       this.commentlist=res.data.data
                   })
+                  this.pojo.comment = this.pojo.comment+1
               }
           })
         },
