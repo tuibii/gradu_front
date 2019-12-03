@@ -7,5 +7,11 @@ export default {
       url: `/${group_name}/${api_name}/page?page=`+page+'&limit='+limit,
       method: 'get'
     })
+  },
+  thumbup(id){
+    return request({
+      url: `/${group_name}/${api_name}/thumbup/${id}`,
+      method: 'get'
+    })
   }
 }
