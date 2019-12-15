@@ -13,5 +13,17 @@ export default {
       url: `/${group_name}/${api_name}/thumbup/${id}`,
       method: 'get'
     })
+  },
+  findById(id) {
+    return request({
+      url: `/${group_name}/${api_name}/${id}`,
+      method: 'get'
+    })
+  },
+  replylist(id) {
+    return request({
+      url: `/${group_name}/reply/problem/${id}`,
+      method: 'get'
+    })
   }
 }

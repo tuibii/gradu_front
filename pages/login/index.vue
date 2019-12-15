@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 110px;width: 400px;" class="wrapper">
+  <div style="margin-top: 110px;width: 400px;min-height: 550px;" class="wrapper">
     <h3 style="margin-bottom: 20px;font-weight: normal;font-size: 20px;color:#676666;text-align: center;">用户登录</h3>
     <el-form :model="pojo" label-width="80px" :rules="dataRule" ref="pojo">
       <el-form-item prop="mobile" label="手机号">

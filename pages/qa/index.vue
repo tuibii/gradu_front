@@ -3,7 +3,6 @@
     <el-col :span="18">
       <div style="display: flex;flex-direction: column;align-items: center;">
         <el-card style="width: 800px; margin: 5px;" :body-style="{ padding: '10px' }" v-for="(data,index) in dataList" :key="index">
-          <div style="margin: 8px;">来自话题：计算机学院</div>
           <div style="margin: 8px;display: flex;flex-direction: row;align-items: center;">
             <el-avatar shape="square" style="width: 24px;height: 24px;margin-right: 15px;">A</el-avatar>{{data.nickname}}
           </div>
