@@ -19,7 +19,7 @@
           <div style="margin: 8px;">
             <el-button type="primary" v-if="!data.canThumbup" @click="thumbup(data.id,index)" plain style="padding: 9px;margin-right: 35px;"><i class="el-icon-caret-top"></i>赞同 {{data.thumbup}}</el-button>
             <el-button type="primary" v-if="data.canThumbup" disabled style="padding: 9px;margin-right: 35px;"><i class="el-icon-caret-top"></i>已赞同 {{data.thumbup}}</el-button>
-            <i class="el-icon-chat-dot-round"></i> {{data.reply}}条评论
+            <i class="el-icon-chat-dot-round"></i> {{data.reply}}条回答
           </div>
         </el-card>
       </div>
