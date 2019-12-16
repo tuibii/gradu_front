@@ -148,10 +148,9 @@ export default {
 </script>
 
 <style>
-
-.quill-editor {
+  .quill-editor {
       min-height: 200px;
       max-height: 400px;
       overflow-y: auto;
-    }
+  }
 </style>
