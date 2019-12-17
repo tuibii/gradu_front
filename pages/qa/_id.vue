@@ -20,6 +20,10 @@
           <span>{{item.nickname}}</span>
         </div>
         <div class="reply-item-content">{{item.content}}</div>
+        <div class="reply-item-rate">
+          <el-rate v-model="item.rate" show-score text-color="#ff9900"></el-rate>
+          <el-rate disabled show-score text-color="#ff9900" v-model="item.rate"></el-rate>
+        </div>
         <el-divider content-position="left">于 {{item.createtime}} 回答</el-divider>
       </div>
     </el-card>
@@ -54,6 +58,7 @@
       },
       data(){
           return {
+              rateValue: [],
               dialogVisible: false,
               content: '',
               editorOption: {
@@ -132,6 +137,9 @@
     margin: 4px;
     font-size: 15px;
     line-height: 25px;
+  }
+  .reply-item-rate{
+    margin-top: 8px;
   }
   .quill-editor {
     min-height: 200px;
