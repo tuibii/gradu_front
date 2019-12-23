@@ -25,5 +25,18 @@ export default {
       url: `/${group_name}/reply/problem/${id}`,
       method: 'get'
     })
+  },
+  reply(data){
+    return request({
+      url: `/${group_name}/reply`,
+      method: 'post',
+      data: data
+    })
+  },
+  focusProblem(id){
+    return request({
+      url: `/${group_name}/${api_name}/focus/${id}`,
+      method: 'get'
+    })
   }
 }

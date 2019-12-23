@@ -19,7 +19,7 @@
           <el-avatar style="margin: 10px;">{{item.nickname}}</el-avatar>
           <span>{{item.nickname}}</span>
         </div>
-        <div class="reply-item-content">{{item.content}}</div>
+        <div class="reply-item-content" v-html="item.content"></div>
         <div class="reply-item-rate">
           <el-rate v-model="item.rate" show-score text-color="#ff9900"></el-rate>
           <el-rate disabled show-score text-color="#ff9900" v-model="item.rate"></el-rate>
@@ -36,7 +36,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="save">提交</el-button>
+            <el-button type="primary" @click="reply">提交</el-button>
         </span>
     </el-dialog>
   </div>
@@ -96,8 +96,30 @@
                   this.content=''
               }
           },
-          save(){
-
+          reply(){
+              qaApi.reply({
+                  problemid: this.problem.id,
+                  content: this.content
+              }).then(res => {
+                  let _this = this
+                  this.$message({
+                      message: res.data.message,
+                      type: (res.data.flag?'success':'error'),
+                      offset: 100,
+                      duration: 500,
+                      onClose: function () {
+                          if (res.data.flag){
+                              _this.dialogVisible=false
+                          }
+                      }
+                  })
+                  if(res.data.flag){
+                      //刷新数据
+                      qaApi.replylist(this.problem.id).then( res=>{
+                          this.replyList=res.data.data
+                      })
+                  }
+              })
           },
           focusProblem(){
               if (getUser().name === undefined){
@@ -110,7 +132,8 @@
                           location.href='/login'
                       }
                   })
-
+              }else {
+                  // qaApi
               }
           }
       }

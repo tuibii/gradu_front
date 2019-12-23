@@ -33,7 +33,7 @@
            <el-avatar >{{item.nickname}}</el-avatar>
          </div>
          <div class="item-content" v-html="item.content">
-          <p class="content">{{item.content}}</p>
+          <p class="content"></p>
          </div>
         </li>
 

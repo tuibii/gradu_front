@@ -89,12 +89,12 @@
                       if (res.data.flag){
                           this.dataList[index].thumbup ++
                           this.dataList[index].canThumbup = true
-                      }else {
-                          this.$message({
-                              message:res.data.message,
-                              offset:100
-                          })
                       }
+                      this.$message({
+                          message:res.data.message,
+                          offset:100,
+                          type:res.data.flag?'success':'error'
+                      })
                   })
               }
           }
