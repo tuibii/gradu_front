@@ -38,5 +38,14 @@ export default {
       url: `/${group_name}/${api_name}/focus/${id}`,
       method: 'get'
     })
+  },
+  rateReply(id,rateValue){
+    return request({
+      url: `/${group_name}/reply/rate/${id}`,
+      method: 'put',
+      data:{
+        rate: rateValue
+      }
+    })
   }
 }

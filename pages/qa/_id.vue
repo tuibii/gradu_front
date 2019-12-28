@@ -21,8 +21,8 @@
         </div>
         <div class="reply-item-content" v-html="item.content"></div>
         <div class="reply-item-rate">
-          <el-rate v-model="item.rate" show-score text-color="#ff9900"></el-rate>
-          <el-rate disabled show-score text-color="#ff9900" v-model="item.rate"></el-rate>
+          <el-rate v-if="item.canRate" v-model="item.rate" show-score text-color="#ff9900" @change="rateReply(index)"></el-rate>
+          <el-rate v-else disabled show-score text-color="#ff9900" v-model="item.rate"></el-rate>
         </div>
         <el-divider content-position="left">于 {{item.createtime}} 回答</el-divider>
       </div>
@@ -45,6 +45,7 @@
   import qaApi from '@/api/qa'
   import axios from 'axios'
   import {getUser} from'@/utils/auth'
+  import qa from "../../api/qa";
   export default {
       asyncData({params}){
           return axios.all([qaApi.findById(params.id), qaApi.replylist(params.id)]).then(
@@ -134,6 +135,31 @@
                   })
               }else {
                   // qaApi
+              }
+          },
+          rateReply(index){
+              if (getUser().name === undefined){
+                  this.$message({
+                      message: "请先登录",
+                      type: "error",
+                      offset: 100,
+                      duration: 2000,
+                      onClose: function () {
+                          location.href='/login'
+                      }
+                  })
+              }else {
+                  // qaApi
+                  qaApi.rateReply(this.replyList[index].id,this.replyList[index].rate).then(res => {
+                      if (res.data.flag){
+                          this.replyList[index].canRate = false
+                      }
+                      this.$message({
+                          message:res.data.message,
+                          offset:100,
+                          type:res.data.flag?'success':'error'
+                      })
+                  })
               }
           }
       }
