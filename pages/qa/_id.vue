@@ -5,7 +5,8 @@
         <h1 style="margin: 4px;font-size: 22px;font-weight: 600;font-synthesis: style;line-height: 32px;color:#1a1a1a;">{{problem.title}}</h1>
         <div style="margin: 4px;font-size: 15px;line-height: 25px;">{{problem.content}}</div>
         <div>
-          <el-button type="primary" @click="focusProblem">关注问题</el-button>
+          <el-button type="primary" v-if="!problem.focus" @click="focusProblem">关注问题</el-button>
+          <el-button type="primary" v-if="problem.focus" disabled>已关注</el-button>
           <el-button @click="toReply">写回答</el-button>
         </div>
       </div>
@@ -135,6 +136,17 @@
                   })
               }else {
                   // qaApi
+                  qaApi.focusProblem(this.problem.id).then(res => {
+                      this.$message({
+                          message:res.data.message,
+                          offset:100,
+                          duration: 2000,
+                          type:res.data.flag?'success':'error'
+                      })
+                      qaApi.findById(this.problem.id).then( res=>{
+                          this.problem=res.data.data
+                      })
+                  })
               }
           },
           rateReply(index){
@@ -158,6 +170,9 @@
                           message:res.data.message,
                           offset:100,
                           type:res.data.flag?'success':'error'
+                      })
+                      qaApi.replylist(this.problem.id).then( res=>{
+                          this.replyList=res.data.data
                       })
                   })
               }
