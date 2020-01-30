@@ -47,5 +47,12 @@ export default {
         rate: rateValue
       }
     })
+  },
+  save(pojo) {
+    return request({
+      url: `/${group_name}/${api_name}`,
+      method: 'post',
+      data: pojo
+    })
   }
 }

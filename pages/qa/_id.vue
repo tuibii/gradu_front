@@ -1,9 +1,13 @@
 <template>
   <div style="margin-top: 110px;min-height: 550px;display: flex;flex-direction: column;align-items: center;">
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom: 10px;padding-right: 1000px;">
+      <el-breadcrumb-item :to="{ path: '/qa' }">返回问答</el-breadcrumb-item>
+      <el-breadcrumb-item>{{problem.title}}</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card :body-style="{display:'flex',padding:'15px',justifyContent:'center'}" style="width: 80%;margin: 10px;">
       <div style="width: 700px;">
         <h1 style="margin: 4px;font-size: 22px;font-weight: 600;font-synthesis: style;line-height: 32px;color:#1a1a1a;">{{problem.title}}</h1>
-        <div style="margin: 4px;font-size: 15px;line-height: 25px;">{{problem.content}}</div>
+        <div style="margin: 4px;font-size: 15px;line-height: 25px;" v-html="problem.content"></div>
         <div>
           <el-button type="primary" v-if="!problem.focus" @click="focusProblem">关注问题</el-button>
           <el-button type="primary" v-if="problem.focus" disabled>已关注</el-button>
@@ -70,8 +74,7 @@
                       toolbar: [
                           [{ 'size': ['small', false, 'large'] }],
                           ['bold', 'italic'],
-                          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                          ['link', 'image']
+                          [{ 'list': 'ordered'}, { 'list': 'bullet' }]
                       ]
                   }
               }

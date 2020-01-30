@@ -12,9 +12,7 @@
             </nuxt-link>
           </div>
           <div style="margin: 8px;">
-            <span style="word-break: break-word;line-height: 1.6;">
-              {{data.content}}
-            </span>
+            <span class="problem-item-content" v-html="data.content"></span>
           </div>
           <div style="margin: 8px;">
             <el-button type="primary" v-if="!data.canThumbup" @click="thumbup(data.id,index)" plain style="padding: 9px;margin-right: 35px;"><i class="el-icon-caret-top"></i>赞同 {{data.thumbup}}</el-button>
@@ -28,7 +26,7 @@
       <div style="display: flex;flex-direction: column;align-items: flex-start;">
         <el-card style="width: 300px;">
           <div style="display: flex;flex-direction: row;justify-content: space-around;">
-            <el-button type="text"><i class="el-icon-chat-line-round" style="margin-bottom: 15px;"></i><div>提问题</div></el-button>
+            <nuxt-link to="/qa/qa-submit"><el-button type="text"><i class="el-icon-chat-line-round" style="margin-bottom: 15px;"></i><div>提问题</div></el-button></nuxt-link>
             <el-button type="text"><i class="el-icon-edit" style="margin-bottom: 15px;"></i><div>写文章</div></el-button>
             <el-button type="text"><i class="el-icon-umbrella" style="margin-bottom: 15px;"></i><div>写树洞</div></el-button>
           </div>
@@ -121,5 +119,13 @@
   }
   .el-col {
     border-radius: 4px;
+  }
+  .problem-item-content{
+    word-break: break-word;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 </style>

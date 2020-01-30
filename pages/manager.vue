@@ -1,6 +1,6 @@
 <template>
   <el-container style="margin-top: 100px;">
-    <el-aside width="200px;">
+    <el-aside width="200px">
       <el-menu :default-openeds="['1','2']">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-user"></i>我的主页</template>
