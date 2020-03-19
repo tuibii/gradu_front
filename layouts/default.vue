@@ -9,7 +9,6 @@
               <ul >
                 <li><nuxt-link to="/">首页</nuxt-link></li>
                 <li><nuxt-link to="/treehole">树洞广场</nuxt-link></li>
-                <li><nuxt-link to="#">文章</nuxt-link></li>
                 <li><nuxt-link to="/qa">问答</nuxt-link></li>
                 <li><nuxt-link to="/club">社团</nuxt-link></li>
                 <li><nuxt-link to="/gathering">活动</nuxt-link></li>
@@ -28,7 +27,6 @@
             <ul>
               <li><nuxt-link to="/">首页</nuxt-link></li>
               <li><nuxt-link to="/treehole">树洞广场</nuxt-link></li>
-              <li><nuxt-link to="#">文章</nuxt-link></li>
               <li><nuxt-link to="/qa">问答</nuxt-link></li>
               <li><nuxt-link to="/club">社团</nuxt-link></li>
               <li><nuxt-link to="/gathering">活动</nuxt-link></li>
