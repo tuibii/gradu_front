@@ -1,9 +1,11 @@
 <template>
   <div class="wrapper activities" style="margin-top: 110px;">
-   <h1>{{item.name}}</h1>
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom: 10px;">
+      <el-breadcrumb-item :to="{ path: '/gathering' }">返回活动</el-breadcrumb-item>
+      <el-breadcrumb-item>{{item.name}}</el-breadcrumb-item>
+    </el-breadcrumb>
    <div class="img-text">
     <div class="left-img">
-     <img :src="item.image" alt="" />
     </div>
     <div class="right-txt">
      <p>开始时间： {{item.starttime}}</p>

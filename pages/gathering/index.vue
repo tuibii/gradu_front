@@ -9,9 +9,8 @@
         <ul class="activity">
           <li class="activity-item" v-for="(data,index) in dataList" :key="index">
             <div class="activity-inner">
-              <a href="http://"></a>
               <div class="img">
-                <a :href="'/gathering/'+data.id" target="_blank"><img src="~/assets/img/w3.jpg" alt="" /></a>
+                <nuxt-link :to="'/gathering/'+data.id"><img src="~/assets/img/w3.jpg" alt="" /></nuxt-link>
               </div>
               <div class="text">
                 <p class="title">{{data.name}}</p>
