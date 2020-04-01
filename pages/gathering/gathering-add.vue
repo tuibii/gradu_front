@@ -22,6 +22,9 @@
       <el-form-item label="活动地点" prop="address">
         <el-input v-model="dataForm.address" placeholder="活动地点"></el-input>
       </el-form-item>
+      <el-form-item label="联系方式" prop="city">
+        <el-input v-model="dataForm.city" placeholder="联系方式"></el-input>
+      </el-form-item>
       <el-form-item label="开始时间" prop="starttime">
         <el-date-picker v-model="dataForm.starttime" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="开始时间"></el-date-picker>
       </el-form-item>
@@ -39,6 +42,7 @@
   </el-dialog>
 </template>
 <script>
+  import gatheringApi from '@/api/gathering'
   export default {
       data () {
           return {
@@ -53,7 +57,8 @@
                   starttime: '',
                   endtime: '',
                   address: '',
-                  enrolltime: ''
+                  enrolltime: '',
+                  city: ''
               }
           }
       },
@@ -65,7 +70,15 @@
               })
           },
           dataFormSubmitHandle () {
-
+              gatheringApi.save(this.dataForm).then(res => {
+                  this.$message({
+                      message: res.data.message,
+                      type: (res.data.flag?'success':'error')
+                  })
+                  if (res.data.flag) {
+                      this.visible = false
+                  }
+              })
           },
           handleAvatarSuccess(res, file) {
               this.dataForm.image = res.data

@@ -54,7 +54,7 @@
        <span>联系方式</span>
       </div>
       <div class="text">
-       <p>QQ群： 771134166</p>
+       <p>{{item.city}}</p>
       </div>
      </div>
      <div class="content-item">

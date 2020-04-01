@@ -46,8 +46,9 @@
         <div style="display: flex;flex-direction: row;justify-content: space-around;">
           <nuxt-link to="/treehole/qa-submit"><el-button type="text"><i class="el-icon-chat-line-round" style="margin-bottom: 15px;"></i><div>提问题</div></el-button></nuxt-link>
           <nuxt-link to="/treehole/treehole-submit"><el-button type="text"><i class="el-icon-umbrella" style="margin-bottom: 15px;"></i><div>写树洞</div></el-button></nuxt-link>
-          <nuxt-link to="/treehole/treehole-submit"><el-button type="text"><i class="el-icon-basketball" style="margin-bottom: 15px;"></i><div>办活动</div></el-button></nuxt-link>
+          <el-button type="text" @click="gatheringHandle"><i class="el-icon-basketball" style="margin-bottom: 15px;"></i><div>办活动</div></el-button>
         </div>
+        <gathering-add v-if="gatheringVisible" ref="gathering"></gathering-add>
       </el-card>
     </div>
     <div class="clearfix"></div>
@@ -72,6 +73,7 @@ import '~/assets/css/page-sj-spit-detail.css'
 import treeholeApi from '@/api/treehole'
 import axios from 'axios'
 import {getUser} from'@/utils/auth'
+import GatheringAdd from '../gathering/gathering-add'
 export default {
     asyncData({params}){
         return axios.all( [ treeholeApi.findById(params.id),treeholeApi.commentlist(params.id)  ] ).then(
@@ -85,6 +87,7 @@ export default {
     },
     data(){
         return {
+            gatheringVisible: false,
             dialogVisible: false,
             content: '',
             editorOption: {
@@ -101,7 +104,16 @@ export default {
             }
         }
     },
+    components: {
+        GatheringAdd
+    },
     methods:{
+        gatheringHandle () {
+            this.gatheringVisible = true
+            this.$nextTick(() => {
+                this.$refs.gathering.init()
+            })
+        },
         onEditorChange({ editor, html, text }) {
             this.content = html
         },

@@ -10,7 +10,7 @@
           <li class="activity-item" v-for="(data,index) in dataList" :key="index">
             <div class="activity-inner">
               <div class="img">
-                <nuxt-link :to="'/gathering/'+data.id"><img src="~/assets/img/w3.jpg" alt="" /></nuxt-link>
+                <nuxt-link :to="'/gathering/'+data.id"><img :src="data.image" alt="" /></nuxt-link>
               </div>
               <div class="text">
                 <p class="title">{{data.name}}</p>
@@ -41,7 +41,7 @@
             }
         },
         asyncData(){
-            return  gatheringApi.page(1,8).then( res => {
+            return  gatheringApi.page(1,100).then( res => {
                 return {dataList: res.data.data.rows }
             })
         },
