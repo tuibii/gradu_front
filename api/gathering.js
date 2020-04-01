@@ -36,5 +36,11 @@ export default {
       url: `/${group_name}/${api_name}/${id}`,
       method: 'delete'
     })
+  },
+  join (id) {
+    return request({
+      url: `/${group_name}/${api_name}/usergath/${id}`,
+      method: 'get'
+    })
   }
 }

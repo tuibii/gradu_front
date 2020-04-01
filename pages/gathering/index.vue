@@ -10,7 +10,9 @@
           <li class="activity-item" v-for="(data,index) in dataList" :key="index">
             <div class="activity-inner">
               <div class="img">
-                <nuxt-link :to="'/gathering/'+data.id"><img :src="data.image" alt="" /></nuxt-link>
+                <nuxt-link :to="'/gathering/'+data.id">
+                  <el-image style="width: 300px; height: 150px" :src="data.image" fit="cover"></el-image>
+                </nuxt-link>
               </div>
               <div class="text">
                 <p class="title">{{data.name}}</p>
@@ -19,7 +21,8 @@
                   <p>地点：{{data.address}}</p>
                 </div>
                 <div class="fr btn">
-                  <span class="sui-btn btn-bao">立即报名</span>
+                  <span class="sui-btn btn-bao" style="background-color: #b2b2b2;" v-if="data.join" disabled>已报名</span>
+                  <span class="sui-btn btn-bao" @click="join(data.id)" v-else>立即报名</span>
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -33,7 +36,6 @@
 <script>
     import '~/assets/css/page-sj-activity-index.css'
     import gatheringApi from '@/api/gathering'
-
     export default {
         data(){
             return {
@@ -42,11 +44,25 @@
         },
         asyncData(){
             return  gatheringApi.page(1,100).then( res => {
-                return {dataList: res.data.data.rows }
+                return {dataList: res.data.data }
             })
         },
         methods: {
-
+            join (id) {
+                this.$confirm('是否确认报名?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    gatheringApi.join(id).then(res => {
+                        this.$message({
+                            message: res.data.message,
+                            offset: 100,
+                            type: (res.data.flag?'success':'error')
+                        })
+                    })
+                })
+            }
         }
     }
 </script>
