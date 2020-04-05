@@ -50,7 +50,6 @@
   import qaApi from '@/api/qa'
   import axios from 'axios'
   import {getUser} from'@/utils/auth'
-  import qa from "../../api/qa";
   export default {
       asyncData({params}){
           return axios.all([qaApi.findById(params.id), qaApi.replylist(params.id)]).then(

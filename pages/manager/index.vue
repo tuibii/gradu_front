@@ -6,12 +6,8 @@
     </ul>
     <div class="tab-content tab-wraped">
       <div id="one" class="tab-pane active">
-        <ul class="question-list">
-          <li> <span class="fl good"><span class="num">12</span> 有用</span> <span class="title"><a href="#">有关PHP初级进阶的问题</a></span> <span class="fr date">4月6日</span> <span class="clearfix"></span> </li>
-          <li> <span class="fl good"><span class="num">12</span> 有用</span> <span class="title"><a href="#">有关JAVA初级进阶的问题</a></span> <span class="fr date">4月6日</span> <span class="clearfix"></span> </li>
-          <li> <span class="fl good"><span class="num">12</span> 有用</span> <span class="title"><a href="#">有关HTML5初级进阶的问题</a></span> <span class="fr date">4月6日</span> <span class="clearfix"></span> </li>
-          <li> <span class="fl good"><span class="num">12</span> 有用</span> <span class="title"><a href="#">有关C++初级进阶的问题</a></span> <span class="fr date">4月6日</span> <span class="clearfix"></span> </li>
-          <li> <span class="fl good"><span class="num">12</span> 有用</span> <span class="title"><a href="#">有关python初级进阶的问题</a></span> <span class="fr date">4月6日</span> <span class="clearfix"></span> </li>
+        <ul class="question-list" v-for="(problem,index) in problemList" :key="index">
+          <li> <span class="fl good"><span class="num">{{problem.reply}}</span> 回复</span> <span class="title"><a href="#">{{problem.title}}</a></span> <span class="fr date">{{problem.createtime}}</span> <span class="clearfix"></span> </li>
         </ul>
       </div>
       <div id="two" class="tab-pane">
@@ -97,7 +93,17 @@
   </div>
 </template>
 <script>
+    import qaApi from '@/api/qa'
+    import axios from 'axios'
   export default {
-
+      asyncData(){
+          return axios.all([qaApi.list()]).then(
+              axios.spread( function( problemList ){
+                  return {
+                      problemList: problemList.data.data
+                  }
+              })
+          )
+      }
   }
 </script>

@@ -14,8 +14,8 @@
      <p>主办方：{{item.sponsor}}</p>
      <p>报名截止：{{item.enrolltime}}
      <div class="join">
-      <button class="sui-btn btn-danger">立即报名</button>
-      <span class="will">报名即将开始</span>
+      <button class="sui-btn btn-danger" style="background-color: #b2b2b2;" v-if="item.join" disabled>已报名</button>
+      <button class="sui-btn btn-danger" @click="join(item.id)" v-else>立即报名</button>
      </div>
     </div>
    </div>
@@ -77,6 +77,23 @@ export default {
         return gatheringApi.findById(params.id).then(res=>{
             return {item: res.data.data}
         })
+    },
+    methods: {
+        join (id) {
+            this.$confirm('是否确认报名?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                gatheringApi.join(id).then(res => {
+                    this.$message({
+                        message: res.data.message,
+                        offset: 100,
+                        type: (res.data.flag?'success':'error')
+                    })
+                })
+            })
+        }
     },
     head: {
         script:[
