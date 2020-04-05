@@ -7,7 +7,7 @@
     <div class="tab-content tab-wraped">
       <div id="one" class="tab-pane active">
         <ul class="question-list" v-for="(problem,index) in problemList" :key="index">
-          <li> <span class="fl good"><span class="num">{{problem.reply}}</span> 回复</span> <span class="title"><a href="#">{{problem.title}}</a></span> <span class="fr date">{{problem.createtime}}</span> <span class="clearfix"></span> </li>
+          <li> <span class="fl good"><span class="num">{{problem.reply}}</span> 回复</span> <span class="title"><nuxt-link :to="'/qa/'+problem.id">{{problem.title}}</nuxt-link></span> <span class="fr date">{{problem.createtime}}</span> <span class="clearfix"></span> </li>
         </ul>
       </div>
       <div id="two" class="tab-pane">

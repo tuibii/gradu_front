@@ -23,8 +23,13 @@
     </el-aside>
     <el-container>
       <el-header style="height: 180px;background-color: #B3C0D1;display: flex;flex-direction:column;justify-content: space-around;align-items: center;">
-        <el-avatar style="width: 80px;height: 80px;"> admin </el-avatar>
-        <div>admin</div>
+        <el-upload class="avatar-uploader" :headers="ossHeader" :action="uploadUrl" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+          <el-avatar style="width: 80px;height: 80px;" v-if="user.avatar === '' || user.avatar === null"> {{user.nickname}} </el-avatar>
+          <el-avatar style="width: 80px;height: 80px;" v-else>
+            <img :src="user.avatar"/>
+          </el-avatar>
+        </el-upload>
+        <div>{{user.nickname}}</div>
         <div>159关注  100粉丝</div>
       </el-header>
       <el-main>
@@ -35,7 +40,36 @@
 </template>
 <script>
 import '~/assets/css/page-sj-person-homepage.css'
+import {getUser} from '@/utils/auth'
+import userApi from '@/api/user'
   export default {
+      asyncData () {
+          return userApi.info().then(res => {
+              return { user: res.data.data }
+          })
+      },
+      data () {
+          return {
+              ossHeader: {'token':getUser().token+''},
+              uploadUrl: 'http://localhost:9011/user/oss/avatar'
+          }
+      },
+      methods: {
+          handleAvatarSuccess(res, file) {
+              this.user.avatar = res.data
+          },
+          beforeAvatarUpload(file) {
+              const isJPG = file.type === 'image/jpeg'
+              const isLt2M = file.size / 1024 / 1024 < 2
 
+              if (!isJPG) {
+                  this.$message.error('上传头像图片只能是 JPG 格式!')
+              }
+              if (!isLt2M) {
+                  this.$message.error('上传头像图片大小不能超过 2MB!')
+              }
+              return isJPG && isLt2M
+          }
+      }
   }
 </script>

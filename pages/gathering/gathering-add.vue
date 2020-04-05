@@ -47,7 +47,7 @@
       data () {
           return {
               visible: false,
-              uploadUrl: 'http://localhost:9011/gathering/oss/upload',
+              uploadUrl: 'http://localhost:9011/user/oss/upload',
               dataForm: {
                   name: '',
                   summary: '',
