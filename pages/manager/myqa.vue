@@ -13,13 +13,10 @@
     <div slot="header" class="clearfix">
       <span>我的回答</span>
     </div>
-    <div class="text item">有关PHP初级进阶的问题</div>
-    <div class="text item">有关PHP初级进阶的问题</div>
-    <div class="text item">有关PHP初级进阶的问题</div>
-    <div class="text item">有关PHP初级进阶的问题</div>
-    <div class="text item">有关PHP初级进阶的问题
-      <nuxt-link to="/manager/myanswer" style="float: right; padding: 3px 0;color: #409eff;">更多</nuxt-link>
+    <div class="text item" v-for="(problem,index) in problemList" :key="index">
+      <span class="title"><nuxt-link :to="'/qa/'+problem.id">{{problem.title}}</nuxt-link></span>
     </div>
+    <nuxt-link to="/manager/myquestion" style="float: right; padding: 3px 0;color: #409eff;">更多</nuxt-link>
   </el-card>
 </div>
 </template>

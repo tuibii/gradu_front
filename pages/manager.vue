@@ -10,9 +10,8 @@
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-message"></i>我的动态</template>
+          <template slot="title"><i class="el-icon-message"></i>其他</template>
           <el-menu-item-group>
-            <nuxt-link to="/manager/dynamic"><el-menu-item index="2-1">个人动态</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/myfocus"><el-menu-item index="2-2">我的关注</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/myfocus"><el-menu-item index="2-3">我的粉丝</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/mycollect"><el-menu-item index="2-4">我的收藏</el-menu-item></nuxt-link>
@@ -40,7 +39,7 @@
 </template>
 <script>
 import '~/assets/css/page-sj-person-homepage.css'
-import {getUser} from '@/utils/auth'
+import {getUser,setUser} from '@/utils/auth'
 import userApi from '@/api/user'
   export default {
       asyncData () {

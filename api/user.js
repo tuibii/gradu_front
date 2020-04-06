@@ -31,6 +31,13 @@ export default {
            method: 'get'
        })
     },
+  dynamic() {
+    return request({
+      url: `/${group_name}/dynamic/list`,
+      method: 'get'
+    })
+  }
+  ,
     saveInfo(user){
         return request({
             url: `/${group_name}/${api_name}/saveinfo`,

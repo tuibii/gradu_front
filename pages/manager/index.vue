@@ -20,87 +20,33 @@
         </ul>
       </div>
     </div>
-    <div class="activities">
+    <div class="activities" style="width: 1200px;">
       <h4 class="tit"><span>我的动态</span></h4>
       <ul class="activities-content">
-        <li>
+        <li v-for="(dynamic,index) in dynamicList" :key="index">
           <div class="index-title">
-            <span class="author">本杰明</span>
-            <span class="operate">关注了标签</span> &middot;
-            <span class="time">3小时前</span>
-          </div>
-          <div class="guanzhuname">
-            <span class="tag">php</span>
-            <span class="tagnum">100</span> 关注
-          </div>
-          <div class="intro">
-            PHP，是英文超文本预处理语言 Hypertext Preprocessor 的缩写。PHP 是一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用。PHP 的语法借鉴吸收C语言、Java和Perl等流行计算机语言的特点，易于一般程序员学习。
-          </div> </li>
-        <li>
-          <div class="index-title">
-            <span class="author">本杰明</span>
-            <span class="operate">回答了问题</span> &middot;
-            <span class="time">3小时前</span>
+            <span class="operate">{{dynamic.action}}</span> &middot;
+            <span class="time">{{dynamic.createDate}}</span>
           </div>
           <div class="question">
-            <p class="title">网页链接如何直接打开微信，并进入公众号关注页面</p>
-            <p class="content">现在针对这个微信是屏蔽的，你可以选择通过连接到一个其他的公众号文章中进行关注。</p>
+            <p class="content" v-html="dynamic.content"></p>
           </div>
-          <div class="qa-num">
-            <span>关注<i>1</i></span>
-            <span>回答<i>2</i></span>
-          </div> </li>
-        <li>
-          <div class="index-title">
-            <span class="author">本杰明</span>
-            <span class="operate">收藏了文章</span> &middot;
-            <span class="time">3小时前</span>
-          </div>
-          <div class="question">
-            <p class="title">网页链接如何直接打开微信，并进入公众号关注页面</p>
-          </div>
-          <div class="qa-num">
-            <span><a href="#">http://baidu.com</a></span>
-          </div> </li>
-        <li>
-          <div class="index-title">
-            <span class="author">本杰明</span>
-            <span class="operate">收藏了文章</span> &middot;
-            <span class="time">3小时前</span>
-          </div>
-          <div class="question">
-            <p class="title">网页链接如何直接打开微信，并进入公众号关注页面</p>
-          </div>
-          <div class="qa-num">
-            <span><a href="#">http://baidu.com</a></span>
-          </div> </li>
-        <li>
-          <div class="index-title">
-            <span class="author">本杰明</span>
-            <span class="operate">回答了问题</span> &middot;
-            <span class="time">3小时前</span>
-          </div>
-          <div class="question">
-            <p class="title">网页链接如何直接打开微信，并进入公众号关注页面</p>
-            <p class="content">现在针对这个微信是屏蔽的，你可以选择通过连接到一个其他的公众号文章中进行关注。</p>
-          </div>
-          <div class="qa-num">
-            <span>关注<i>1</i></span>
-            <span>回答<i>2</i></span>
-          </div> </li>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 <script>
     import qaApi from '@/api/qa'
+    import userApi from '@/api/user'
     import axios from 'axios'
   export default {
       asyncData(){
-          return axios.all([qaApi.list()]).then(
-              axios.spread( function( problemList ){
+          return axios.all([qaApi.list(),userApi.dynamic()]).then(
+              axios.spread( function( problemList,dynamicList ){
                   return {
-                      problemList: problemList.data.data
+                      problemList: problemList.data.data,
+                      dynamicList: dynamicList.data.data
                   }
               })
           )
