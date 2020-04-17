@@ -8,7 +8,7 @@
             <nuxt-link to="/manager"><el-menu-item index="1-1">我的主页</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/myqa"><el-menu-item index="1-2">我的问答</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/mytreehole"><el-menu-item index="1-3">我的树洞</el-menu-item></nuxt-link>
-            <nuxt-link to="/manager/myqa"><el-menu-item index="1-4">我的活动</el-menu-item></nuxt-link>
+            <nuxt-link to="/manager/mygathering"><el-menu-item index="1-4">我的活动</el-menu-item></nuxt-link>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
@@ -43,7 +43,19 @@ import userApi from '@/api/user'
   export default {
       asyncData () {
           return userApi.info().then(res => {
-              return { user: res.data.data }
+              if (!res.data.flag) {
+                  this.$message({
+                      message: res.data.message,
+                      type: "error",
+                      offset: 100,
+                      duration: 2000,
+                      onClose: function () {
+                          location.href='/login'
+                      }
+                  })
+              } else {
+                  return { user: res.data.data }
+              }
           })
       },
       data () {

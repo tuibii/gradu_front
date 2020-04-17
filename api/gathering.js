@@ -42,5 +42,11 @@ export default {
       url: `/${group_name}/${api_name}/usergath/${id}`,
       method: 'get'
     })
-  }
+  },
+    mygathing() {
+        return request({
+            url: `/${group_name}/${api_name}/mygathering`,
+            method: 'get'
+        })
+    }
 }

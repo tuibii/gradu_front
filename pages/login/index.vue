@@ -56,7 +56,7 @@
                             location.href='/' //用户中心
 
                         }else{
-                            this.$message( {
+                            this.$message({
                                 message: res.data.message,
                                 type: "error",
                                 offset: 100
