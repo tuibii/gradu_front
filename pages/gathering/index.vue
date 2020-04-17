@@ -60,6 +60,12 @@
                             offset: 100,
                             type: (res.data.flag?'success':'error')
                         })
+
+                        if (res.data.flag) {
+                            gatheringApi.page(1,100).then( res => {
+                                this.dataList = res.data.data
+                            })
+                        }
                     })
                 })
             }

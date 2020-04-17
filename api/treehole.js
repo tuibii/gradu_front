@@ -14,6 +14,12 @@ export default {
           method: 'get'
         })
     },
+  mytreehole(nick) {
+    return request({
+      url: `/${group_name}/${api_name}/mytreehole/${nick}`,
+      method: 'get'
+    })
+  },
     commentlist(id) {
         return request({
           url: `/${group_name}/${api_name}/commentlist/${id}`,

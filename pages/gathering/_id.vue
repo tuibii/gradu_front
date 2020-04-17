@@ -91,6 +91,11 @@ export default {
                         offset: 100,
                         type: (res.data.flag?'success':'error')
                     })
+                    if (res.data.flag) {
+                        gatheringApi.findById(id).then(res=>{
+                            this.item = res.data.data
+                        })
+                    }
                 })
             })
         }
