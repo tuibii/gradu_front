@@ -8,14 +8,14 @@
             <nuxt-link to="/manager"><el-menu-item index="1-1">我的主页</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/myqa"><el-menu-item index="1-2">我的问答</el-menu-item></nuxt-link>
             <nuxt-link to="/manager/mytreehole"><el-menu-item index="1-3">我的树洞</el-menu-item></nuxt-link>
-            <nuxt-link to="/manager/mygathering"><el-menu-item index="1-4">我的活动</el-menu-item></nuxt-link>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="2">
-          <template slot="title"><i class="el-icon-message"></i>其他</template>
-          <el-menu-item-group>
-            <nuxt-link to="/manager/mycollect"><el-menu-item index="2-1">我的收藏</el-menu-item></nuxt-link>
-            <nuxt-link to="/manager/account"><el-menu-item index="2-2">账户设置</el-menu-item></nuxt-link>
+            <el-submenu index="1-4" :default-openeds="['1','2']">
+                <template slot="title">
+                    我的活动
+                </template>
+                <nuxt-link to="/manager/mygathering"><el-menu-item index="1-4-1">发布活动</el-menu-item></nuxt-link>
+                <nuxt-link to="/manager/myjoin"><el-menu-item index="1-4-2">报名活动</el-menu-item></nuxt-link>
+            </el-submenu>
+              <nuxt-link to="/manager/account"><el-menu-item index="1-5">账户设置</el-menu-item></nuxt-link>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

@@ -43,9 +43,27 @@ export default {
       method: 'get'
     })
   },
+    myjoin() {
+        return request({
+            url: `/${group_name}/${api_name}/myjoin`,
+            method: 'get'
+        })
+    },
     mygathing() {
         return request({
             url: `/${group_name}/${api_name}/mygathering`,
+            method: 'get'
+        })
+    },
+    joinList(id) {
+        return request({
+            url: `/${group_name}/${api_name}/joinList/${id}`,
+            method: 'get'
+        })
+    },
+    exportTable(id) {
+        return request({
+            url: `/${group_name}/${api_name}/export/${id}`,
             method: 'get'
         })
     }
