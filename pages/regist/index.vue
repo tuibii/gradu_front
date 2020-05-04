@@ -109,7 +109,12 @@
                         this.$message({
                             message: res.data.message,
                             type: (res.data.flag?'success':'error'),
-                            offset: 100
+                            offset: 100,
+                            onClose: function () {
+                                if (res.data.flag) {
+                                    location.href='/login'
+                                }
+                            }
                         })
                     })
                 })
